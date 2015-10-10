@@ -96,22 +96,22 @@ public class Standard extends Product {
 	}
 
 	public double calcFee() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public double calcTax() {
-		return
+		return this.calcSub()*.075+4+5.6+this.arrivalCity.getPassengerFacilityFee();
 	}
 
-	public double calcSub() {
-		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes())*this.costPerMile;
+	public double distance(){
+		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes());
 	}
+	
+	public double calcSub() {
+		return this.distance()*this.costPerMile;
+		}
 
 	public double calcTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.calcTax()+this.calcSub();
 	}
-
-
 }
