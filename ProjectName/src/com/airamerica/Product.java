@@ -1,6 +1,8 @@
 package com.airamerica;
 
-public abstract class Product {
+import com.airamerica.interfaces.ProductInterface;
+
+public abstract class Product implements ProductInterface{
 	private String productCode;
 
 	public Product(String productCode) {

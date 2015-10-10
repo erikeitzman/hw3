@@ -1,7 +1,9 @@
 package com.airamerica;
 
+import com.airamerica.utils.Haversine;
+
 public class Standard extends Product {
-	private Airport departurecity;
+	private Airport departureCity;
 	private Airport arrivalCity;
 	private String departureDateTime;
 	private String arrivalDateTime;
@@ -10,25 +12,31 @@ public class Standard extends Product {
 	private String aircraftType;
 	private Double costPerMile;
 	
-	public Standard(String productCode, Airport departurecity, Airport arrivalCity, String departureDateTime,
+	public Standard(String productCode, Airport departureCity, Airport arrivalCity, String departureDateTime,
 			String arrivalDateTime, String flightNo, String flightClass, String aircraftType) {
 		super(productCode);
-		this.departurecity = departurecity;
+		this.departureCity = departureCity;
 		this.arrivalCity = arrivalCity;
 		this.departureDateTime = departureDateTime;
 		this.arrivalDateTime = arrivalDateTime;
 		this.flightNo = flightNo;
 		this.flightClass = flightClass;
 		this.aircraftType = aircraftType;
-		this.costPerMile = (double) 1;
+		if (this.flightClass.equals("BC")){
+			this.costPerMile = 0.5;
+		}else if(this.flightClass.equals("EP")){
+			this.costPerMile = 0.2;
+		}else{
+			this.costPerMile = 0.15;
+		}
 	}
 
 	public Airport getDeparturecity() {
-		return departurecity;
+		return departureCity;
 	}
 
-	public void setDeparturecity(Airport departurecity) {
-		this.departurecity = departurecity;
+	public void setDeparturecity(Airport departureCity) {
+		this.departureCity = departureCity;
 	}
 
 	public Airport getArrivalCity() {
@@ -85,6 +93,24 @@ public class Standard extends Product {
 
 	public void setCostPerMile(Double costPerMile) {
 		this.costPerMile = costPerMile;
+	}
+
+	public double calcFee() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public double calcTax() {
+		return
+	}
+
+	public double calcSub() {
+		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes())*this.costPerMile;
+	}
+
+	public double calcTotal() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
