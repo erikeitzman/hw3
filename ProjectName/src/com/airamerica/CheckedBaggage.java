@@ -16,5 +16,29 @@ public class CheckedBaggage extends Product{
 		this.ticket = ticket;
 	}
 
+	@Override
+	public double calcFee() {
+		
+		return 0;
+	}
+
+	@Override
+	public double calcTax() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calcSub() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calcTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

@@ -1,5 +1,8 @@
 package com.airamerica;
 
+import com.airamerica.utils.Haversine;
+import com.airamerica.utils.*;
+
 public class Insurance extends Product{
 	
 	private String name;
@@ -29,5 +32,33 @@ public class Insurance extends Product{
 	public void setCostPerMile(Double costPerMile) {
 		this.costPerMile = costPerMile;
 	}
+
+	
+	public double calcTax() {
+		
+		return this.calcSub()*0.04;
+	}
+	
+	public double calcSub(Standard ticket) {
+		// TODO Auto-generated method stub
+		return this.getCostPerMile() * ticket.distance();
+	}
+
+	public double calcTotal() {
+		
+		return this.calcSub() + this.calcTax();
+	}
+	
+	public double calcFee() {
+		
+		 return 0;
+	}
+	
+	public double calcSub() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 	
 }

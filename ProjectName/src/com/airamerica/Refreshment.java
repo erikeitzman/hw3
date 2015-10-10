@@ -23,6 +23,26 @@ public class Refreshment extends Product{
 		this.cost = cost;
 	}
 	
+	public double calcFee() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public double calcTax() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public double calcSub() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public double calcTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 
 	
 }
