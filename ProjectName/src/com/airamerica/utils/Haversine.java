@@ -32,10 +32,5 @@ public class Haversine {
     }
     
     
-    // Distance between Atlanta(ATL) and (PHX)
-    //ATL -(33�45'N84�23'W) PHX -(33�29'N112�04'W)
-    public static void main(String[] args) {
-    	System.out.println("Distance between ATL and PHX:"+getMiles(33,45,84,23,33,29,112,4));
-        System.out.println("Distance between ATL and PHX:"+getMiles(33+45.0/60,84+23.0/60,33+29.0/60,112+4.0/60));
-    }
+   
 }
