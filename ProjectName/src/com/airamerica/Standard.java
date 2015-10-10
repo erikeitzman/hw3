@@ -94,6 +94,10 @@ public class Standard extends Product {
 	public void setCostPerMile(Double costPerMile) {
 		this.costPerMile = costPerMile;
 	}
+	
+	public double distance(){
+		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes());
+	}
 
 	public double calcFee() {
 		return 0;
@@ -103,9 +107,6 @@ public class Standard extends Product {
 		return this.calcSub()*.075+4+5.6+this.arrivalCity.getPassengerFacilityFee();
 	}
 
-	public double distance(){
-		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes());
-	}
 	
 	public double calcSub() {
 		return this.distance()*this.costPerMile;

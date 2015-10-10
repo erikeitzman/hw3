@@ -36,7 +36,7 @@ public class DataConverter {
 			Airport b = new Airport(array[0], array[1], a, latitudeDeg, latitudeMin, longitudeDeg, longitudeMin, Double.parseDouble(array[4]));
 			airportArr[i] = b;
 		}
-
+		System.out.println("made it");
 		s = scanFileIn("data/Persons.dat");
 		//Loops through all the lines of the person data file and creates person objects
 		Person personArr[] = new Person[Integer.parseInt(s.nextLine())];
@@ -104,7 +104,7 @@ public class DataConverter {
 			}else if(array[1].equals("SR")){
 				Refreshment a = new Refreshment(array[0], array[2], Double.parseDouble(array[3]));
 				productArr[i] = a;
-			}else if(array[1].equals("SA")){
+			}else if(array[1].equals("SS")){
 				SpecialAssistance a = new SpecialAssistance(array[0], array[2]);
 				productArr[i] = a;
 			}else if(array[1].equals("TA")){
@@ -129,7 +129,27 @@ public class DataConverter {
 			CheckedBaggage a = new CheckedBaggage(checkedBagCode.get(i), findTicket(productArr, checkedBagTicketCode.get(i)));
 			productArr[checkedBagIndex.get(i)] = a;
 			}
+		
+		s = scanFileIn("data/Invoices.dat");
+		Invoice invoiceArr[] = new Invoice[Integer.parseInt(s.nextLine())];
+		//Loops through all the lines of the airport data file and creates airport objects
+		for (int i = 0; i < airportArr.length; i++){
+			int commas = 0;
+			String line = s.nextLine();
+			String array[] = line.split(";");
+			String array2[] = array[4].split(",");
+			for(int j = 0; j < line.length(); i++) {
+			    if(line.charAt(j) == ',') commas++;
+			}
+			for (int j = 0; j<=commas; j++){
+				String array4[] = array[4+j].split(":");
+				System.out.println(findClass(productArr, array4[j]));
+			}
+			//Invoice b = new Invoice();
+			//invoiceArr[i] = b;
+		}
 	}
+	
 
 
 
@@ -162,5 +182,13 @@ public class DataConverter {
 			}
 		}
 		return productArr[0];
+	}
+	public static String findClass(Product productArr[], String productCode){
+		for (int i = 0; i < productArr.length; i++){
+			if(productArr[i].getProductCode().equals(productCode)){
+				return productArr[i].getClass().getName();
+			}
+		}
+		return "asdfasdfasdf";
 	}
 }

@@ -1,5 +1,7 @@
 package com.airamerica;
 
+import com.airamerica.utils.Haversine;
+
 public class Offseason extends Standard{
 	
 	private String seasonStartDate;
@@ -39,4 +41,10 @@ public class Offseason extends Standard{
 	public void setRebate(double rebate) {
 		this.rebate = rebate;
 	}
+
+	@Override
+	public double calcSub(){
+		return this.distance()*(1-this.getRebate())*this.getCostPerMile();
+	}
+
 }
