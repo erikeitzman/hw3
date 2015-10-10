@@ -9,7 +9,7 @@ public class Award extends Standard{
 			String arrivalDateTime, String flightNo, String flightClass, String aircraftType, Double pointsPerMile) {
 		super(productCode, departurecity, arrivalCity, departureDateTime, arrivalDateTime, flightNo, flightClass,
 				aircraftType);
-		this.redemptionFee = redemptionFee;
+		this.redemptionFee = (double) 30;
 		this.pointsPerMile = pointsPerMile;
 	}
 
