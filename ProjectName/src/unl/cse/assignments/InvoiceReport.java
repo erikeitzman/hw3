@@ -18,6 +18,7 @@ public class InvoiceReport {
 
 		sb.append("Executive Summary Report\n");
 		sb.append("=========================\n");
+		sb.append("Invoice                    Customer                           Salesperson            Subtotal     Fees    Taxes     Discount     Total" );
 
 
 		//TODO: Add code for generating summary of all Invoices
@@ -62,6 +63,9 @@ public class InvoiceReport {
 	}
 
 	public static void main(String args[]) {
+		InvoiceReport ir = new InvoiceReport();
+		String summary = ir.generateSummaryReport();
+		System.out.println(summary);
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -80,9 +84,9 @@ public class InvoiceReport {
 			Customer b =  customerArr[0];
 			Person c = personArr[0];
 			for(int j = 0; j < line.length(); j++) {
-			    if(line.charAt(j) == ','){
-			    	commas++;
-			    }
+				if(line.charAt(j) == ','){
+					commas++;
+				}
 			}
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
@@ -98,16 +102,25 @@ public class InvoiceReport {
 					c =  personArr[k];
 					k = personArr.length;
 				}
+
 			}
 			Invoice a = new Invoice(array[0], b, c, array[3]);
-			InvoiceReport ir = new InvoiceReport();
-			String summary = ir.generateSummaryReport();
-			String details = ir.generateDetailReport();
-			System.out.println(summary);
-			System.out.println("\n\n");
-			System.out.println(details);
-			System.out.println("======================================================================================================================");
-			System.out.println("\n\n");
+			invoiceArr[i]=a;
+
+			
+			if (array[2].equals("online")){
+				a.printSummary(1);
+			}else{
+				a.printSummary(0);
+			}
 		}
-		}
+
+
+		//		System.out.println("\n\n");
+		//		System.out.println(details);
+		//		System.out.println("======================================================================================================================");
+		//		System.out.println("\n\n");
+
+
 	}
+}

@@ -28,10 +28,6 @@ public class Refreshment extends Product{
 		return 0;
 	}
 	
-	public double calcTax() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	public double calcSub() {
 		// TODO Auto-generated method stub
