@@ -153,8 +153,7 @@ public class InvoiceReport {
 					k = personArr.length;
 				}
 			}
-			Invoice a = new Invoice(array[0], b, c, array[3], productList, finalsub, finaltax, fee, discount);
-			invoiceArr[i]=a;
+			
 			
 			if (b.getType().equals("Corporate")){
 				discount = (finalsub) * .12*(-1);
@@ -162,6 +161,8 @@ public class InvoiceReport {
 			}else if (b.getType().equals("Government")){
 				discount = finaltax*(-1);
 			}
+			Invoice a = new Invoice(array[0], b, c, array[3], productList, finalsub, finaltax, fee, discount);
+			invoiceArr[i]=a;
 //			System.out.printf("%.2f\n ", discount);
 //			System.out.printf("%.2f\n", fee);
 //			System.out.printf("%.2f\n", finalsub + finaltax + discount + fee);

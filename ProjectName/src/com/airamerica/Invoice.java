@@ -88,9 +88,11 @@ public class Invoice {
 		if (i == 1){
 			lastName1 = "ONLINE";
 			firstName1 = "Null";
-		}
-		System.out.printf("%s %30s [%s] %20s, %s     %.2f  %.2f  %.2f  %.2f  %.2f\n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, this.getFinalsub(), this.getFee(), this.getFinaltax(), this.getDiscount(), this.getFinalsub()+this.getDiscount()+this.getFee()+this.getFinaltax());
 		
+		}
+		String name = lastName1 +", " + firstName1;
+		String result = String.format("%1$s %2$30s [3$%s] %4$20s %5$10.2f %6$10.2f %7$10.2f %8$10.2f         %.2f\n",this.getInvoiceCode(), customer.getName(), customer.getType(), name, this.getFinalsub(), this.getFee(), this.getFinaltax(), this.getDiscount(), this.getFinalsub()+this.getDiscount()+this.getFee()+this.getFinaltax());
+		System.out.print(result);
 	}
 	
 }
