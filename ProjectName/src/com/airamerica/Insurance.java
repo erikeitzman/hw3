@@ -39,11 +39,7 @@ public class Insurance extends Product{
 		return this.calcSub()*0.04;
 	}
 	
-	public double calcSub(Standard ticket) {
-		// TODO Auto-generated method stub
-		return this.getCostPerMile() * ticket.distance();
-	}
-
+	
 	public double calcTotal() {
 		
 		return this.calcSub() + this.calcTax();
@@ -59,6 +55,8 @@ public class Insurance extends Product{
 		return 0;
 	}
 	
-	
+	public double subTot(Standard ticket){
+		return this.getCostPerMile() * ticket.distance();
+	}
 	
 }
