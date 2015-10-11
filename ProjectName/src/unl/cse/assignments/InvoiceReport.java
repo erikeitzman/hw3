@@ -134,11 +134,11 @@ public class InvoiceReport {
 					finalsub = subtotal + finalsub;
 					finaltax = taxes + finaltax;
 				}
-				System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, taxes+subtotal);
+				//System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, taxes+subtotal);
 				
 				
 			}
-			System.out.printf("%.2f  %.2f  %.2f\n", finalsub, finaltax, finalsub+finaltax);
+			//System.out.printf("%.2f  %.2f  %.2f\n", finalsub, finaltax, finalsub+finaltax);
 			
 			
 			for (int j = 0; j < customerArr.length; j++){
@@ -153,23 +153,18 @@ public class InvoiceReport {
 					k = personArr.length;
 				}
 			}
-			Invoice a = new Invoice(array[0], b, c, array[3]);
+			Invoice a = new Invoice(array[0], b, c, array[3], productList, finalsub, finaltax, fee, discount);
 			invoiceArr[i]=a;
 			
 			if (b.getType().equals("Corporate")){
 				discount = (finalsub) * .12*(-1);
 				fee = 40.0;
-			}
-			else if (b.getType().equals("Government")){
+			}else if (b.getType().equals("Government")){
 				discount = finaltax*(-1);
 			}
-			else {
-				
-			}
-			System.out.printf("%.2f\n ", discount);
-			System.out.printf("%.2f\n", fee);
-			System.out.printf("%.2f\n", finalsub + finaltax + discount + fee);
-			
+//			System.out.printf("%.2f\n ", discount);
+//			System.out.printf("%.2f\n", fee);
+//			System.out.printf("%.2f\n", finalsub + finaltax + discount + fee);
 			
 			if (array[2].equals("online")){
 				a.printSummary(1);

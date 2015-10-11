@@ -9,13 +9,23 @@ public class Invoice {
 	private Person person;	
 	private String invoiceDate;	
 	private List<Product> productList;
-	public Invoice(String invoiceCode, Customer customer, Person person, String invoiceDate) {
+	private double finalsub;
+	private double finaltax;
+	private double fee;
+	private double discount;
+
+	public Invoice(String invoiceCode, Customer customer, Person person, String invoiceDate, List<Product> productList,
+			double finalsub, double finaltax, double fee, double discount) {
 		super();
 		InvoiceCode = invoiceCode;
 		this.customer = customer;
 		this.person = person;
 		this.invoiceDate = invoiceDate;
-		this.productList = new ArrayList<Product>();
+		this.productList = productList;
+		this.finalsub = finalsub;
+		this.finaltax = finaltax;
+		this.fee = fee;
+		this.discount = discount;
 	}
 	public String getInvoiceCode() {
 		return InvoiceCode;
@@ -41,8 +51,29 @@ public class Invoice {
 	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
-	public void addProduct(Product product){
-		this.productList.add(product);
+	public double getFinalsub() {
+		return finalsub;
+	}
+	public void setFinalsub(double finalsub) {
+		this.finalsub = finalsub;
+	}
+	public double getFinaltax() {
+		return finaltax;
+	}
+	public void setFinaltax(double finaltax) {
+		this.finaltax = finaltax;
+	}
+	public double getFee() {
+		return fee;
+	}
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 	public List<Product> getProductList() {
 		return productList;
@@ -53,12 +84,12 @@ public class Invoice {
 	public void printSummary(int i){
 		String lastName1 = person.getLastName();
 		String firstName1 = person.getFirstName();
-				
+		
 		if (i == 1){
 			lastName1 = "ONLINE";
 			firstName1 = "Null";
 		}
-		System.out.printf("%s %30s [%s] %20s, %s   \n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, "1", "2", "3", "4", "5");
+		System.out.printf("%s %30s [%s] %20s, %s     %.2f  %.2f  %.2f  %.2f  %.2f\n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, this.getFinalsub(), this.getFee(), this.getFinaltax(), this.getDiscount(), this.getFinalsub()+this.getDiscount()+this.getFee()+this.getFinaltax());
 		
 	}
 	

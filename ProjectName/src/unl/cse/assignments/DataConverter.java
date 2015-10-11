@@ -150,45 +150,6 @@ public class DataConverter {
 				System.out.println(findSub(productArr, array3[0]));
 				//System.out.println(findClass(productArr, array3[0]));
 			}
-			
-			
-			
-			//Finds the customer who matches the contact listed for the customer
-			for (int j = 0; j < customerArr.length; j++){
-					if(customerArr[j].getCustomerCode().equals(array[1])){
-					b =  customerArr[j];
-					j = customerArr.length;
-				}
-			}
-			
-			for (int k = 0; k < personArr.length; k++){
-				//TO-DO
-				if(personArr[k].getPersonCode().equals(array[2])){
-					c =  personArr[k];
-					k = personArr.length;
-				}
-			}
-			
-			Invoice a = new Invoice(array[0], b, c, array[3]);
-			
-			invoiceArr[i]=a;
-			if (array[2].equals("online")){
-				a.printSummary(1);
-			}else{
-				a.printSummary(0);
-			}
-//			for(int j = 0; j < line.length(); j++) {
-//			    if(line.charAt(j) == ','){
-//			    	commas++;
-//			    }
-//			}
-//			for (int j = 0; j<=commas; j++){
-//				String array3[] = array2[j].split(":");
-//				//System.out.println(findClass(productArr, array3[0]));
-//			}
-//			Invoice b = new Invoice(array[0], findCustomer(customerArr, array[1]), findPerson(personArr, array[2]), array[3]);
-//			invoiceArr[i] = b;
-//			b.printSummary(10);
 		}
 	}
 	
