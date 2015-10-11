@@ -1,6 +1,9 @@
 package com.airamerica;
 
 import com.airamerica.utils.Haversine;
+
+import unl.cse.assignments.DataConverter;
+
 import com.airamerica.utils.*;
 
 public class Insurance extends Product{
@@ -32,10 +35,8 @@ public class Insurance extends Product{
 	public void setCostPerMile(Double costPerMile) {
 		this.costPerMile = costPerMile;
 	}
-	public double calcTax(Product productArr[], String ticketCode) {
-		return this.calcSub(productArr, ticketCode);
-	}
+	
 	public double calcSub(Product productArr[], String ticketCode) {
-		return 1.0;
+		return DataConverter.findTicket(productArr, ticketCode).distance()*this.getCostPerMile();
 	}
 }
