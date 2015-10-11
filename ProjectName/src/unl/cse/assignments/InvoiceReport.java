@@ -67,11 +67,14 @@ public class InvoiceReport {
 	public static void main(String args[]) {
 		InvoiceReport ir = new InvoiceReport();
 		String summary = ir.generateSummaryReport();
+		String costsummary = ir.getCostSummary();
 		System.out.println(summary);
 		Double taxes = 0.0;
 		Double subtotal = 0.0;
 		Double finalsub = 0.0;
 		Double finaltax = 0.0;
+		Double discount = 0.0;
+		Double fee = 0.0;
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -88,6 +91,8 @@ public class InvoiceReport {
 			taxes = 0.0;
 			finalsub = 0.0;
 			finaltax = 0.0;
+			discount = 0.0;
+			fee = 0.0;
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
@@ -134,6 +139,8 @@ public class InvoiceReport {
 				
 			}
 			System.out.printf("%.2f  %.2f  %.2f\n", finalsub, finaltax, finalsub+finaltax);
+			
+			
 			for (int j = 0; j < customerArr.length; j++){
 				if(customerArr[j].getCustomerCode().equals(array[1])){
 					b =  customerArr[j];
@@ -148,15 +155,29 @@ public class InvoiceReport {
 			}
 			Invoice a = new Invoice(array[0], b, c, array[3]);
 			invoiceArr[i]=a;
-
-
+			
+			if (b.getType().equals("Corporate")){
+				discount = (finalsub) * .12*(-1);
+				fee = 40.0;
+			}
+			else if (b.getType().equals("Government")){
+				discount = finaltax*(-1);
+			}
+			else {
+				
+			}
+			System.out.printf("%.2f\n ", discount);
+			System.out.printf("%.2f\n", fee);
+			System.out.printf("%.2f\n", finalsub + finaltax + discount + fee);
+			
+			
 			if (array[2].equals("online")){
 				a.printSummary(1);
 			}else{
 				a.printSummary(0);
 			}
 		}
-
+		
 
 		//		System.out.println("\n\n");
 		//		System.out.println(details);

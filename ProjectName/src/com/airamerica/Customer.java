@@ -28,13 +28,13 @@ public class Customer {
 
 	public String getType() {
 		if(this.type.equals("C")){
-			return type = "Corporate";
+			return "Corporate";
 		}
 		else if(this.type.equals("G")){
-			return type = "General";
+			return "General";
 		}
 		else if (this.type.equals("V")){
-			return type = "Government";
+			return "Government";
 		}
 		return null;
 	}
