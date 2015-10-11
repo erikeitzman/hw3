@@ -29,4 +29,22 @@ public class Award extends Standard{
 		this.pointsPerMile = pointsPerMile;
 	}
 	
+	public Double getRewardsCost(){
+		return this.getPointsPerMile()*this.distance();
+	}
+	
+	@Override
+	public double calcTax(int quantity, String ticketCode) {
+		return quantity*(this.distance()*this.getCostPerMile()*.075+(4+5.6+this.getArrivalCity().getPassengerFacilityFee()));
+	}
+
+	@Override
+	public double calcSub(int quantity, String ticketCode) {
+		return 30*quantity;
+		}
+
+	@Override
+	public double calcTotal(int quantity, String ticketCode) {
+		return this.calcTax(quantity, ticketCode)+this.calcSub(quantity, ticketCode);
+	}
 }

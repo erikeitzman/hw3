@@ -39,20 +39,8 @@ public class Insurance extends Product{
 		return this.calcSub()*0.04;
 	}
 	
-	
-	public double calcTotal() {
-		
-		return this.calcSub() + this.calcTax();
-	}
-	
-	public double calcFee() {
-		
-		 return 0;
-	}
-	
 	public double calcSub() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1.0;
 	}
 	
 	public double subTot(Standard ticket){

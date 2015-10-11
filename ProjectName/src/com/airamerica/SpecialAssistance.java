@@ -15,29 +15,5 @@ public class SpecialAssistance extends Product{
 	public void setTypeOfService(String typeOfService) {
 		this.typeOfService = typeOfService;
 	}
-
-	@Override
-	public double calcFee() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double calcTax() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double calcSub() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double calcTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 }

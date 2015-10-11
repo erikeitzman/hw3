@@ -31,11 +31,11 @@ public class Standard extends Product {
 		}
 	}
 
-	public Airport getDeparturecity() {
+	public Airport getDepartureCity() {
 		return departureCity;
 	}
 
-	public void setDeparturecity(Airport departureCity) {
+	public void setDepartureCity(Airport departureCity) {
 		this.departureCity = departureCity;
 	}
 
@@ -96,23 +96,21 @@ public class Standard extends Product {
 	}
 	
 	public double distance(){
-		return Haversine.getMiles(this.arrivalCity.getLatitudes(), this.arrivalCity.getLongitudes(), this.departureCity.getLatitudes(), this.departureCity.getLongitudes());
+		return Haversine.getMiles(this.getArrivalCity().getLatitudes(), this.getArrivalCity().getLongitudes(), this.getDepartureCity().getLatitudes(), this.getDepartureCity().getLongitudes());
 	}
 
-	public double calcFee() {
-		return 0;
+	@Override
+	public double calcTax(int quantity, String ticketCode) {
+		return this.calcSub(quantity, ticketCode)*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
 	}
 
-	public double calcTax() {
-		return this.calcSub()*.075+4+5.6+this.arrivalCity.getPassengerFacilityFee();
-	}
-
-	
-	public double calcSub() {
-		return this.distance()*this.costPerMile;
+	@Override
+	public double calcSub(int quantity, String ticketCode) {
+		return this.distance()*this.getCostPerMile()*quantity;
 		}
 
-	public double calcTotal() {
-		return this.calcTax()+this.calcSub();
+	@Override
+	public double calcTotal(int quantity, String ticketCode) {
+		return this.calcTax(quantity, ticketCode)+this.calcSub(quantity, ticketCode);
 	}
 }

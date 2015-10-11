@@ -15,30 +15,19 @@ public class CheckedBaggage extends Product{
 	public void setTicket(Product ticket) {
 		this.ticket = ticket;
 	}
-
+	
 	@Override
-	public double calcFee() {
-		
-		return 0;
+	public double calcSub(int quantity, String ticketCode) {
+		return 25+(quantity-1)*35;
 	}
 
 	@Override
-	public double calcTax() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double calcTax(int quantity, String ticketCode) {
+		return calcSub(quantity, ticketCode)*.04;
 	}
 
 	@Override
-	public double calcSub() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double calcTotal(int quantity, String ticketCode) {
+		return calcSub(quantity, ticketCode)+calcTax(quantity, ticketCode);
 	}
-
-	@Override
-	public double calcTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 }
