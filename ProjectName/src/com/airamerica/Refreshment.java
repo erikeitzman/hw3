@@ -35,7 +35,7 @@ public class Refreshment extends Product{
 	
 	public double calcSub() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.getCost();
 	}
 	
 	public double calcTotal() {

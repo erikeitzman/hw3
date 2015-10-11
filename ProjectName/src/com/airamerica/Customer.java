@@ -27,7 +27,16 @@ public class Customer {
 	}
 
 	public String getType() {
-		return type;
+		if(this.type.equals("C")){
+			return type = "Corporate";
+		}
+		else if(this.type.equals("G")){
+			return type = "General";
+		}
+		else if (this.type.equals("V")){
+			return type = "Government";
+		}
+		return null;
 	}
 
 	public void setType(String type) {

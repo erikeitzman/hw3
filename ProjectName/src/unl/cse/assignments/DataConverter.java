@@ -137,6 +137,9 @@ public class DataConverter {
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
+			Customer b =  customerArr[0];
+			Person c = personArr[0];
+			
 			for(int j = 0; j < line.length(); j++) {
 			    if(line.charAt(j) == ','){
 			    	commas++;
@@ -144,10 +147,48 @@ public class DataConverter {
 			}
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
-				System.out.println(findClass(productArr, array3[0]));
+				System.out.println(findSub(productArr, array3[0]));
+				//System.out.println(findClass(productArr, array3[0]));
 			}
-			//Invoice b = new Invoice();
-			//invoiceArr[i] = b;
+			
+			
+			
+			//Finds the customer who matches the contact listed for the customer
+			for (int j = 0; j < customerArr.length; j++){
+					if(customerArr[j].getCustomerCode().equals(array[1])){
+					b =  customerArr[j];
+					j = customerArr.length;
+				}
+			}
+			
+			for (int k = 0; k < personArr.length; k++){
+				//TO-DO
+				if(personArr[k].getPersonCode().equals(array[2])){
+					c =  personArr[k];
+					k = personArr.length;
+				}
+			}
+			
+			Invoice a = new Invoice(array[0], b, c, array[3]);
+			
+			invoiceArr[i]=a;
+			if (array[2].equals("online")){
+				a.printSummary(1);
+			}else{
+				a.printSummary(0);
+			}
+//			for(int j = 0; j < line.length(); j++) {
+//			    if(line.charAt(j) == ','){
+//			    	commas++;
+//			    }
+//			}
+//			for (int j = 0; j<=commas; j++){
+//				String array3[] = array2[j].split(":");
+//				//System.out.println(findClass(productArr, array3[0]));
+//			}
+//			Invoice b = new Invoice(array[0], findCustomer(customerArr, array[1]), findPerson(personArr, array[2]), array[3]);
+//			invoiceArr[i] = b;
+//			b.printSummary(10);
 		}
 	}
 	
@@ -192,4 +233,37 @@ public class DataConverter {
 		}
 		return "asdfasdfasdf";
 	}
+
+	public static Double findSub(Product productArr[], String productCode){
+		for (int i = 0; i < productArr.length; i++){
+			if(productArr[i].getProductCode().equals(productCode)){
+				if(findClass(productArr, productCode).equals("com.airamerica.Insurance")){
+				}
+			}
+		}
+		return 0.0;
+	}
+	
+	
+//	public static Person findPerson(Person personArr[], String personCode){
+//		for (int k = 0; k < personArr.length; k++){
+//			if(personArr[k].getPersonCode().equals(personCode)){
+//				k = personArr.length;
+//				return personArr[k];
+//			}
+//		}
+//		return personArr[0];
+//	}
+//	
+//	public static Customer findCustomer(Customer customerArr[], String customerCode){
+//		for (int k = 0; k < customerArr.length; k++){
+//			if(customerArr[k].getCustomerCode().equals(customerCode)){
+//				k = customerArr.length;
+//				return customerArr[k];
+//			}
+//		}
+//		//System.out.println("asdfasdf");
+//		return customerArr[0];
+//	}
+	
 }

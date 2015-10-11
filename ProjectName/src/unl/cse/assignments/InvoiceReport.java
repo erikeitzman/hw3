@@ -15,6 +15,7 @@ public class InvoiceReport {
 		sb.append("Executive Summary Report\n");
 		sb.append("=========================\n");
 		
+		
 		//TODO: Add code for generating summary of all Invoices
 		
 		return sb.toString();
@@ -51,25 +52,7 @@ public class InvoiceReport {
 	
 	/* TODO: Loop through all invoices and call the getTravelSummary() and 
 	getCostSummary() for each invoice*/
-//	
-//	Scanner s = null; 
-//	s = DataConverter.scanFileIn("data/Invoices.dat");
-//	Airport airportArr[] = new Airport[Integer.parseInt(s.nextLine())];
-//	//Loops through all the lines of the airport data file and creates airport objects
-//	for (int i = 0; i < airportArr.length; i++){
-//		int commas = 0;
-//		String line = s.nextLine();
-//		String array[] = line.split(";");
-//		String array2[] = array[4].split(",");
-//		for(int j = 0; j < line.length(); i++) {
-//		    if(line.charAt(j) == ',') commas++;
-//		}
-//		for (int j = 0; j<=commas; j++){
-//			String array4[] = array[4+j].split(":");
-//		}
-//		Airport b = new Airport(array[0], array[1], a, latitudeDeg, latitudeMin, longitudeDeg, longitudeMin, Double.parseDouble(array[4]));
-//		airportArr[i] = b;
-//	}
+
 	
 	return sb.toString();
 	}

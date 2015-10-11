@@ -50,5 +50,16 @@ public class Invoice {
 	public void setProductList(List<Product> productList) {
 		this.productList = productList;
 	}
+	public void printSummary(int i){
+		String lastName1 = person.getLastName();
+		String firstName1 = person.getFirstName();
+				
+		if (i == 1){
+			lastName1 = "ONLINE";
+			firstName1 = "Null";
+		}
+		System.out.printf("%s %30s [%s] %20s, %s\n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, "1", "2", "3", "4", "5");
+		
+	}
 	
 }
