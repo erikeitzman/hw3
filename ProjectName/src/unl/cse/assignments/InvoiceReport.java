@@ -1,5 +1,7 @@
 package unl.cse.assignments;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.airamerica.Address;
@@ -81,6 +83,8 @@ public class InvoiceReport {
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
+			Double subtotal = 0.0;
+			List<Product> productList = new ArrayList<Product>();
 			Customer b =  customerArr[0];
 			Person c = personArr[0];
 			for(int j = 0; j < line.length(); j++) {
@@ -90,6 +94,10 @@ public class InvoiceReport {
 			}
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
+				productList.add(DataConverter.findTicket(productArr, array3[0]));
+				subtotal = subtotal + productList.get(j).calcSub(1, "who cares");
+				//if(DataConverter.findClass(productArr, produc))
+				System.out.println(subtotal);
 			}
 			for (int j = 0; j < customerArr.length; j++){
 				if(customerArr[j].getCustomerCode().equals(array[1])){
@@ -102,12 +110,11 @@ public class InvoiceReport {
 					c =  personArr[k];
 					k = personArr.length;
 				}
-
 			}
 			Invoice a = new Invoice(array[0], b, c, array[3]);
 			invoiceArr[i]=a;
 
-			
+
 			if (array[2].equals("online")){
 				a.printSummary(1);
 			}else{
