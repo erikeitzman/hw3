@@ -68,7 +68,10 @@ public class InvoiceReport {
 		InvoiceReport ir = new InvoiceReport();
 		String summary = ir.generateSummaryReport();
 		System.out.println(summary);
+		Double taxes = 0.0;
 		Double subtotal = 0.0;
+		Double total = 0.0;
+		Double finaltotal = 0.0;
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -82,6 +85,9 @@ public class InvoiceReport {
 		for (int i = 0; i < invoiceArr.length; i++){
 			int commas = 0;
 			subtotal = 0.0;
+			taxes = 0.0;
+			total = 0.0;
+			finaltotal = 0.0;
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
@@ -98,12 +104,13 @@ public class InvoiceReport {
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
 				int quantity = 1;
-				double distance = 0;
+				String distance = null;
 				productList.add(DataConverter.findTicket(productArr, array3[0]));
 				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.CheckedBaggage" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment"){
 					quantity = Integer.parseInt(array3[1]);
 					if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance"){
-						distance = DataConverter.findTicket(productArr, array3[2]).distance();
+						distance = String.valueOf(DataConverter.findTicket(productArr, array3[2]).distance());
+				
 					}
 				}else if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.SpecialAssistance"){
 					quantity = 1;
@@ -112,12 +119,21 @@ public class InvoiceReport {
 					flight = true;
 				}
 				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment" && flight == true){
-					subtotal = subtotal + .95*productList.get(j).calcSub(quantity, "who cares");
+					subtotal = .95*productList.get(j).calcSub(quantity, distance);
+					taxes = productList.get(j).calcTax(quantity, distance);
+					total = subtotal + taxes;
+					finaltotal = total + finaltotal;
 				}else{
-					subtotal = subtotal + productList.get(j).calcSub(quantity, "who cares");
+					subtotal = productList.get(j).calcSub(quantity, distance);
+					taxes = productList.get(j).calcTax(quantity, distance);
+					total = subtotal + taxes;
+					finaltotal = total + finaltotal;
 				}
-				System.out.println(subtotal);
+				System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, total);
+				
+				
 			}
+			System.out.printf("%.2f\n", finaltotal);
 			for (int j = 0; j < customerArr.length; j++){
 				if(customerArr[j].getCustomerCode().equals(array[1])){
 					b =  customerArr[j];

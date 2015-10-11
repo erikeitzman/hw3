@@ -58,7 +58,8 @@ public class Invoice {
 			lastName1 = "ONLINE";
 			firstName1 = "Null";
 		}
-		System.out.printf("%s %30s [%s] %20s, %s\n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, "1", "2", "3", "4", "5");
+		System.out.printf("%s %30s [%s] %20s, %s   \n",this.getInvoiceCode(), customer.getName(), customer.getType(), lastName1, firstName1, "1", "2", "3", "4", "5");
 		
 	}
+	
 }

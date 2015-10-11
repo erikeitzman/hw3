@@ -35,8 +35,8 @@ public class Insurance extends Product{
 	public void setCostPerMile(Double costPerMile) {
 		this.costPerMile = costPerMile;
 	}
-	
-	public double calcSub(Product productArr[], String ticketCode) {
-		return DataConverter.findTicket(productArr, ticketCode).distance()*this.getCostPerMile();
+	@Override
+	public double calcSub(int quantity, String ticketCode) {
+		return quantity*(Double.parseDouble(ticketCode)*this.getCostPerMile());
 	}
 }

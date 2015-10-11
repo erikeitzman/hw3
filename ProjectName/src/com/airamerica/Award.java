@@ -35,12 +35,12 @@ public class Award extends Standard{
 	
 	@Override
 	public double calcTax(int quantity, String ticketCode) {
-		return quantity*(this.distance()*this.getCostPerMile()*.075+(4+5.6+this.getArrivalCity().getPassengerFacilityFee()));
+		return 30*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
 	}
 
 	@Override
 	public double calcSub(int quantity, String ticketCode) {
-		return 30*quantity;
+		return 30;
 		}
 
 	@Override
