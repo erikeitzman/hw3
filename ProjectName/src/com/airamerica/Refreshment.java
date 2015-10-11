@@ -23,20 +23,9 @@ public class Refreshment extends Product{
 		this.cost = cost;
 	}
 	
-	public double calcFee() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	public double calcSub() {
-		// TODO Auto-generated method stub
-		return this.getCost();
-	}
-	
-	public double calcTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	public double calcSub(int quantity, String ticketCode){
+		return this.getCost()*quantity;
 	}
 	
 

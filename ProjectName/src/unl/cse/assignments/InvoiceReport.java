@@ -68,6 +68,7 @@ public class InvoiceReport {
 		InvoiceReport ir = new InvoiceReport();
 		String summary = ir.generateSummaryReport();
 		System.out.println(summary);
+		Double subtotal = 0.0;
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -80,10 +81,11 @@ public class InvoiceReport {
 		productArr = DataConverter.productsToArray(airportArr);
 		for (int i = 0; i < invoiceArr.length; i++){
 			int commas = 0;
+			subtotal = 0.0;
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
-			Double subtotal = 0.0;
+			
 			List<Product> productList = new ArrayList<Product>();
 			Customer b =  customerArr[0];
 			Person c = personArr[0];
@@ -92,11 +94,28 @@ public class InvoiceReport {
 					commas++;
 				}
 			}
+			boolean flight = false;
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
+				int quantity = 1;
+				double distance = 0;
 				productList.add(DataConverter.findTicket(productArr, array3[0]));
-				subtotal = subtotal + productList.get(j).calcSub(1, "who cares");
-				//if(DataConverter.findClass(productArr, produc))
+				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.CheckedBaggage" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment"){
+					quantity = Integer.parseInt(array3[1]);
+					if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance"){
+						distance = DataConverter.findTicket(productArr, array3[2]).distance();
+					}
+				}else if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.SpecialAssistance"){
+					quantity = 1;
+				}else{
+					quantity = Integer.parseInt(array3[2]);
+					flight = true;
+				}
+				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment" && flight == true){
+					subtotal = subtotal + .95*productList.get(j).calcSub(quantity, "who cares");
+				}else{
+					subtotal = subtotal + productList.get(j).calcSub(quantity, "who cares");
+				}
 				System.out.println(subtotal);
 			}
 			for (int j = 0; j < customerArr.length; j++){

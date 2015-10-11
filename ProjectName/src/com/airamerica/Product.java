@@ -33,5 +33,7 @@ public abstract class Product implements ProductInterface{
 	public double calcSub(int quantity, String ticketCode){
 		return 0;
 	}
-	
+	public double distance(){
+		return 0;
+	}
 }

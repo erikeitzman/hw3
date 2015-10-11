@@ -95,6 +95,7 @@ public class Standard extends Product {
 		this.costPerMile = costPerMile;
 	}
 	
+	@Override
 	public double distance(){
 		return Haversine.getMiles(this.getArrivalCity().getLatitudes(), this.getArrivalCity().getLongitudes(), this.getDepartureCity().getLatitudes(), this.getDepartureCity().getLongitudes());
 	}

@@ -52,7 +52,7 @@ public class Offseason extends Standard{
 
 	@Override
 	public double calcSub(int quantity, String ticketCode) {
-		return quantity*20*(1-this.getRebate())*this.distance()*this.getCostPerMile();
+		return quantity*(20+(1-this.getRebate())*this.distance()*this.getCostPerMile());
 		}
 
 	@Override
