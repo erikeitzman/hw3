@@ -70,8 +70,8 @@ public class InvoiceReport {
 		System.out.println(summary);
 		Double taxes = 0.0;
 		Double subtotal = 0.0;
-		Double total = 0.0;
-		Double finaltotal = 0.0;
+		Double finalsub = 0.0;
+		Double finaltax = 0.0;
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -86,8 +86,8 @@ public class InvoiceReport {
 			int commas = 0;
 			subtotal = 0.0;
 			taxes = 0.0;
-			total = 0.0;
-			finaltotal = 0.0;
+			finalsub = 0.0;
+			finaltax = 0.0;
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
@@ -121,19 +121,19 @@ public class InvoiceReport {
 				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment" && flight == true){
 					subtotal = .95*productList.get(j).calcSub(quantity, distance);
 					taxes = productList.get(j).calcTax(quantity, distance);
-					total = subtotal + taxes;
-					finaltotal = total + finaltotal;
+					finalsub = subtotal + finalsub;
+					finaltax = taxes + finaltax;
 				}else{
 					subtotal = productList.get(j).calcSub(quantity, distance);
 					taxes = productList.get(j).calcTax(quantity, distance);
-					total = subtotal + taxes;
-					finaltotal = total + finaltotal;
+					finalsub = subtotal + finalsub;
+					finaltax = taxes + finaltax;
 				}
-				System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, total);
+				System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, taxes+subtotal);
 				
 				
 			}
-			System.out.printf("%.2f\n", finaltotal);
+			System.out.printf("%.2f  %.2f  %.2f\n", finalsub, finaltax, finalsub+finaltax);
 			for (int j = 0; j < customerArr.length; j++){
 				if(customerArr[j].getCustomerCode().equals(array[1])){
 					b =  customerArr[j];
