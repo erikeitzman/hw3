@@ -258,7 +258,10 @@ public class InvoiceReport {
 		StringBuilder sb = new StringBuilder();		
 		sb.append("Individual Invoice Detail Reports\n");
 		sb.append("==================================================\n");
-
+		;
+		this.getTravelSummary();
+		
+		
 		/* TODO: Loop through all invoices and call the getTravelSummary() and 
 	getCostSummary() for each invoice*/
 
@@ -269,10 +272,10 @@ public class InvoiceReport {
 	public static void main(String args[]) {
 		InvoiceReport ir = new InvoiceReport();
 		String summary = ir.generateSummaryReport();
-		String costsummary = ir.getCostSummary();
-		String travelsummary = ir.getTravelSummary();
+		String detail = ir.generateDetailReport();
 		System.out.println(summary);
-		System.out.println(travelsummary);
-		//		System.out.println(costsummary);
+		System.out.println(detail);
 	}
+	
+	
 }
