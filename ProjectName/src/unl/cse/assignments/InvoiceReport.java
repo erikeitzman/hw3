@@ -134,10 +134,12 @@ public class InvoiceReport {
 		StringBuilder sb = new StringBuilder();
 		q = sb.append("===============================================================================================================================================\n").append("FLIGHT INFORMATION\n").append("==================================================\n").append("Day, Date         Flight          Class            DepartureCity and Time               ArrivalCity and Time                       Aircraft").toString();
 		System.out.println(q);
-		double finalsub = 0.0;
-		double finaltax = 0.0;
-		double fee = 0.0;
-		double discount = 0.0;
+		Double taxes = 0.0;
+		Double subtotal = 0.0;
+		Double finalsub = 0.0;
+		Double finaltax = 0.0;
+		Double discount = 0.0;
+		Double fee = 0.0;
 		Airport airportArr[] = new Airport[1];
 		Person personArr[] = new Person[1];
 		Customer customerArr[] = new Customer[1];
@@ -148,8 +150,14 @@ public class InvoiceReport {
 		personArr = DataConverter.personToArray();
 		customerArr = DataConverter.customersToArray(personArr);
 		productArr = DataConverter.productsToArray(airportArr);
-		for (int i = 0; i < invoiceArr.length;){
+		for (int i = 0; i < invoiceArr.length; i++){
 			int commas = 0;
+			subtotal = 0.0;
+			taxes = 0.0;
+			finalsub = 0.0;
+			finaltax = 0.0;
+			discount = 0.0;
+			fee = 0.0;
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
@@ -157,23 +165,46 @@ public class InvoiceReport {
 			List<Product> productList = new ArrayList<Product>();
 			Customer b =  customerArr[0];
 			Person c = personArr[0];
-
 			for(int j = 0; j < line.length(); j++) {
 				if(line.charAt(j) == ','){
 					commas++;
 				}
 			}
-
+			boolean flight = false;
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
-				if(array3.length > 3){
-					for (int k=0; k< array3.length; k++){
-					
-						}
-						
-				
+				int quantity = 1;
+				String distance = null;
+				productList.add(DataConverter.findTicket(productArr, array3[0]));
+				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.CheckedBaggage" || DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment"){
+					quantity = Integer.parseInt(array3[1]);
+					if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Insurance"){
+						distance = String.valueOf(DataConverter.findTicket(productArr, array3[2]).distance());
+
+					}
+				}else if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.SpecialAssistance"){
+					quantity = 1;
+				}else{
+					quantity = Integer.parseInt(array3[2]);
+					flight = true;
 				}
+				if(DataConverter.findClass(productArr, array3[0]) == "com.airamerica.Refreshment" && flight == true){
+					subtotal = .95*productList.get(j).calcSub(quantity, distance);
+					taxes = productList.get(j).calcTax(quantity, distance);
+					finalsub = subtotal + finalsub;
+					finaltax = taxes + finaltax;
+				}else{
+					subtotal = productList.get(j).calcSub(quantity, distance);
+					taxes = productList.get(j).calcTax(quantity, distance);
+					finalsub = subtotal + finalsub;
+					finaltax = taxes + finaltax;
+				}
+				//System.out.printf("%.2f  %.2f  %.2f \n" ,subtotal,  taxes, taxes+subtotal);
+
+
 			}
+			//System.out.printf("%.2f  %.2f  %.2f\n", finalsub, finaltax, finalsub+finaltax);
+
 
 			for (int j = 0; j < customerArr.length; j++){
 				if(customerArr[j].getCustomerCode().equals(array[1])){
@@ -189,12 +220,17 @@ public class InvoiceReport {
 			}
 
 
-
+			if (b.getType().equals("Corporate")){
+				discount = (finalsub) * .12*(-1);
+				fee = 40.0;
+			}else if (b.getType().equals("Government")){
+				discount = finaltax*(-1);
+			}
 			Invoice a = new Invoice(array[0], b, c, (Standard) productArr[1], array[3], productList, finalsub, finaltax, fee, discount);
 			invoiceArr[i]=a;
 
 			a.flightinformation();
-			break;
+
 		}
 
 		
