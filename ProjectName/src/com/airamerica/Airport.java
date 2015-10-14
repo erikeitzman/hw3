@@ -68,4 +68,6 @@ public class Airport {
 	public void setPassengerFacilityFee(double passengerFacilityFee) {
 		this.passengerFacilityFee = passengerFacilityFee;
 	}
+	
+
 }

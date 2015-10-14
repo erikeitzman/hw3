@@ -1,12 +1,13 @@
 package com.airamerica;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-public class Invoice {
+public class Invoice  {
 	private String InvoiceCode;
 	private Customer customer;
-	private Person person;	
+	private Person person;
+	private Standard standard;
 	private String invoiceDate;	
 	private List<Product> productList;
 	private double finalsub;
@@ -14,9 +15,8 @@ public class Invoice {
 	private double fee;
 	private double discount;
 
-	public Invoice(String invoiceCode, Customer customer, Person person, String invoiceDate, List<Product> productList,
+	public Invoice(String invoiceCode, Customer customer, Person person, Standard standard, String invoiceDate, List<Product> productList,
 			double finalsub, double finaltax, double fee, double discount) {
-		super();
 		InvoiceCode = invoiceCode;
 		this.customer = customer;
 		this.person = person;
@@ -26,6 +26,7 @@ public class Invoice {
 		this.finaltax = finaltax;
 		this.fee = fee;
 		this.discount = discount;
+		this.standard = standard;
 	}
 	public String getInvoiceCode() {
 		return InvoiceCode;
@@ -44,6 +45,12 @@ public class Invoice {
 	}
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	public Standard getStandard() {
+		return standard;
+	}
+	public void setStandard(Standard standard) {
+		this.standard = standard;
 	}
 	public String getInvoiceDate() {
 		return invoiceDate;
@@ -91,8 +98,15 @@ public class Invoice {
 		
 		}
 		String name = lastName1 +", " + firstName1;
-		String result = String.format("%1$s %2$30s [3$%s] %4$20s %5$10.2f %6$10.2f %7$10.2f %8$10.2f         %.2f\n",this.getInvoiceCode(), customer.getName(), customer.getType(), name, this.getFinalsub(), this.getFee(), this.getFinaltax(), this.getDiscount(), this.getFinalsub()+this.getDiscount()+this.getFee()+this.getFinaltax());
-		System.out.print(result);
+		System.out.printf("%s%30s[%2s]%22s% 25.2f %10.2f %10.2f   %10.2f  %10.2f\n",this.getInvoiceCode(), customer.getName(), customer.getType(), name, this.getFinalsub(), this.getFee(), this.getFinaltax(), this.getDiscount(), this.getFinalsub()+this.getDiscount()+this.getFee()+this.getFinaltax());
+		
 	}
 	
+	public void flightinformation(){
+		//TODO: get day and date
+		System.out.printf("%s,%s %15s %15s %30s,%s %25s,%s %30s\n ", "Day","Date", standard.getFlightNo(), standard.getFlightClass(), standard.getDepartureCity().getAddress().getCity(),standard.getDepartureCity().getAddress().getState(), standard.getArrivalCity().getAddress().getCity(), standard.getArrivalCity().getAddress().getState(), standard.getAircraftType() );
+		System.out.printf("                                                              (%s) %3s                  (%s) %3s\n", standard.getDepartureCity().getAirportCode(), standard.getDepartureDateTime(), standard.getArrivalCity().getAirportCode(), standard.getArrivalDateTime());
+		//System.out.println("               Traveller               Age     Seat NO.");
+		
+	}
 }
