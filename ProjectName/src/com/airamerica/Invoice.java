@@ -4,8 +4,6 @@ package com.airamerica;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airamerica.utils.SoldProduct;
-
 import unl.cse.assignments.DataConverter;
 
 public class Invoice  {

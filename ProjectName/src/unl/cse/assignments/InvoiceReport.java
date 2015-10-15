@@ -11,8 +11,8 @@ import com.airamerica.Invoice;
 import com.airamerica.Passengers;
 import com.airamerica.Person;
 import com.airamerica.Product;
+import com.airamerica.SoldProduct;
 import com.airamerica.Standard;
-import com.airamerica.utils.SoldProduct;
 
 /* Assignment 3,5 and 6 (Project Phase-II,IV and V) */
 

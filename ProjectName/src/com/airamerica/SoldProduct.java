@@ -1,6 +1,4 @@
-package com.airamerica.utils;
-
-import com.airamerica.Product;
+package com.airamerica;
 
 import unl.cse.assignments.DataConverter;
 
