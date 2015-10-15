@@ -36,14 +36,13 @@ public class InvoiceReport {
 			List<Passengers> passengerList = new ArrayList<Passengers>();
 			Customer b =  customerArr[0];
 			Person c = personArr[0];
-			boolean flight = false;
 			for (int j = 0; j<array2.length; j++){
 				String array3[] = array2[j].split(":");
 				productList.add(DataConverter.findTicket(productArr, array3[0]));
 				if(array3.length > 3){
 					int passengerCount = Integer.parseInt(array3[2]);
-					for (int k = 0; k < passengerCount; k=k+5){
-						Passengers tempPass = new Passengers(array3[3+k], DataConverter.findPerson(personArr, array3[4+k]) , array3[5+k], Integer.parseInt(array3[6+k]), array3[7+k], array3[0]);
+					for (int k = 0; k < passengerCount; k++){
+						Passengers tempPass = new Passengers(array3[3+k*5], DataConverter.findPerson(personArr, array3[4+k*5]) , array3[5+k*5], Integer.parseInt(array3[6+k*5]), array3[7+k*5], array3[0]);
 						passengerList.add(tempPass);
 					}
 				}
@@ -62,17 +61,10 @@ public class InvoiceReport {
 			}
 			Invoice a = new Invoice(array[0], b, c, array[3], productList, passengerList, 1.0, 1.0, 1.0, 1.0);
 			invoiceArr[i]=a;
-			System.out.println("got to this part");
-			//a.flightinformation();
 		}
-	
-		
-		
-		
-		
-		
-		return null;
+	return invoiceArr;
 	}
+
 	private String generateSummaryReport() {
 		String q;
 		StringBuilder sb = new StringBuilder();
