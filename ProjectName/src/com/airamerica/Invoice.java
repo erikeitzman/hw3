@@ -93,14 +93,19 @@ public class Invoice  {
 	public Boolean flightBool(int i){
 			if (this.getProductList().get(i).getProduct().getClass().getName().equals("com.airamerica.Standard") || this.getProductList().get(i).getProduct().getClass().getName().equals("com.airamerica.Offseason") || this.getProductList().get(i).getProduct().getClass().getName().equals("com.airamerica.Award")){
 				return true;
+			}else{
+				return false;
 			}
-		return false;
 	}
 	
 	public void printFlightInfo(){
-		for (int i = 0; i < this.getPassengerList().size(); i++){
+		for (int i = 0; i < this.getProductList().size(); i++){
 			if(flightBool(i)){
-				System.out.println(this.getPassengerList().get(i).getFlight());
+				for(int j = 0; j<this.getPassengerList().size(); j++){
+					if(this.getPassengerList().get(j).getFlight().equals(this.getProductList().get(i).getProduct().getProductCode())){
+						System.out.println(this.getPassengerList().get(j).getPerson().getLastName()+", "+this.getPassengerList().get(j).getPerson().getFirstName()+", "+this.getPassengerList().get(j).getAge()+", "+this.getPassengerList().get(j).getSeatNumber());
+					}
+				}
 			}
 		}
 	}
