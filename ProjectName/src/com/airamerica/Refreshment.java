@@ -24,8 +24,13 @@ public class Refreshment extends Product{
 	}
 	
 	@Override
-	public double calcSub(int quantity, String ticketCode){
-		return this.getCost()*quantity;
+	public double calcSub(Double quantity, Double distance){
+		if (distance == 1.0){
+			return this.getCost()*quantity*.95;
+		}
+		else{
+			return this.getCost()*quantity;
+		}
 	}
 	
 

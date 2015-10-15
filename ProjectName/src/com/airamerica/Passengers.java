@@ -5,14 +5,22 @@ public class Passengers {
 	private Person person;
 	private String Id;
 	private int age;
-	private String Nationality;
-	public Passengers(String seatNumber, Person person, String id, int age, String nationality) {
+	private String nationality;
+	private String flight;
+	public Passengers(String seatNumber, Person person, String id, int age, String nationality, String flight) {
 		super();
 		this.seatNumber = seatNumber;
 		this.person = person;
-		Id = id;
+		this.Id = id;
 		this.age = age;
-		Nationality = nationality;
+		this.nationality = nationality;
+		this.flight = flight;
+	}
+	public String getFlight() {
+		return flight;
+	}
+	public void setFlight(String flight) {
+		this.flight = flight;
 	}
 	public String getSeatNumber() {
 		return seatNumber;
@@ -39,10 +47,10 @@ public class Passengers {
 		this.age = age;
 	}
 	public String getNationality() {
-		return Nationality;
+		return nationality;
 	}
 	public void setNationality(String nationality) {
-		Nationality = nationality;
+		this.nationality = nationality;
 	}
 	
 

@@ -18,19 +18,19 @@ public abstract class Product implements ProductInterface{
 		this.productCode = productCode;
 	}
 
-	public double calcTax(int quantity, String ticketCode) {
-		return calcSub(quantity, ticketCode)*.04;
+	public double calcTax(Double quantity, Double distance) {
+		return calcSub(quantity, distance)*.04;
 	}
 
-	public double calcFee(int quantity, String ticketCode) {
+	public double calcFee(Double quantity, Double distance) {
 		return 0;
 	}
 
-	public double calcTotal(int quantity, String ticketCode) {
-		return calcSub(quantity, ticketCode)+calcTax(quantity, ticketCode);
+	public double calcTotal(Double quantity, Double distance) {
+		return calcSub(quantity, distance)+calcTax(quantity, distance);
 	}
 	
-	public double calcSub(int quantity, String ticketCode){
+	public double calcSub(Double quantity, Double distance){
 		return 0;
 	}
 	public double distance(){

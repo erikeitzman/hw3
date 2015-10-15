@@ -17,17 +17,7 @@ public class CheckedBaggage extends Product{
 	}
 	
 	@Override
-	public double calcSub(int quantity, String ticketCode) {
+	public double calcSub(Double quantity, Double distance) {
 		return 25+(quantity-1)*35;
-	}
-
-	@Override
-	public double calcTax(int quantity, String ticketCode) {
-		return calcSub(quantity, ticketCode)*.04;
-	}
-
-	@Override
-	public double calcTotal(int quantity, String ticketCode) {
-		return calcSub(quantity, ticketCode)+calcTax(quantity, ticketCode);
 	}
 }

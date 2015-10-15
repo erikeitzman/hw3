@@ -147,8 +147,6 @@ public class DataConverter {
 			}
 			for (int j = 0; j<=commas; j++){
 				String array3[] = array2[j].split(":");
-				System.out.println(findSub(productArr, array3[0]));
-				//System.out.println(findClass(productArr, array3[0]));
 			}
 		}
 	}
@@ -194,38 +192,25 @@ public class DataConverter {
 		}
 		return "asdfasdfasdf";
 	}
-
-	public static Double findSub(Product productArr[], String productCode){
-		for (int i = 0; i < productArr.length; i++){
-			if(productArr[i].getProductCode().equals(productCode)){
-				if(findClass(productArr, productCode).equals("com.airamerica.Insurance")){
-				}
+	
+	public static Person findPerson(Person personArr[], String personCode){
+		for (int k = 0; k < personArr.length; k++){
+			if(personArr[k].getPersonCode().equals(personCode)){
+				return personArr[k];
 			}
 		}
-		return 0.0;
+		return personArr[0];
 	}
 	
+	public static Customer findCustomer(Customer customerArr[], String customerCode){
+		for (int k = 0; k < customerArr.length; k++){
+			if(customerArr[k].getCustomerCode().equals(customerCode)){
+				return customerArr[k];
+			}
+		}
+		return customerArr[0];
+	}
 	
-//	public static Person findPerson(Person personArr[], String personCode){
-//		for (int k = 0; k < personArr.length; k++){
-//			if(personArr[k].getPersonCode().equals(personCode)){
-//				k = personArr.length;
-//				return personArr[k];
-//			}
-//		}
-//		return personArr[0];
-//	}
-//	
-//	public static Customer findCustomer(Customer customerArr[], String customerCode){
-//		for (int k = 0; k < customerArr.length; k++){
-//			if(customerArr[k].getCustomerCode().equals(customerCode)){
-//				k = customerArr.length;
-//				return customerArr[k];
-//			}
-//		}
-//		//System.out.println("asdfasdf");
-//		return customerArr[0];
-//	}
 	//Airport Scanner
 	public static Airport[] airportToArray(){
 		Scanner s = null; 

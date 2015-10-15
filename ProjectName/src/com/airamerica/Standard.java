@@ -101,17 +101,17 @@ public class Standard extends Product {
 	}
 
 	@Override
-	public double calcTax(int quantity, String ticketCode) {
-		return this.calcSub(quantity, ticketCode)*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
+	public double calcTax(Double quantity, Double distance) {
+		return this.calcSub(quantity, distance)*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
 	}
 
 	@Override
-	public double calcSub(int quantity, String ticketCode) {
+	public double calcSub(Double quantity, Double distance) {
 		return this.distance()*this.getCostPerMile()*quantity;
 		}
 
 	@Override
-	public double calcTotal(int quantity, String ticketCode) {
-		return this.calcTax(quantity, ticketCode)+this.calcSub(quantity, ticketCode);
+	public double calcTotal(Double quantity, Double distance) {
+		return this.calcTax(quantity, distance)+this.calcSub(quantity, distance);
 	}
 }

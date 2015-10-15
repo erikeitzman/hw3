@@ -41,23 +41,23 @@ public class Offseason extends Standard{
 	}
 
 	@Override
-	public double calcFee(int quantity, String ticketCode){
+	public double calcFee(Double quantity, Double distance){
 		return 30.0;
 	}
 	
 	@Override
-	public double calcTax(int quantity, String ticketCode) {
-		return calcSub(quantity, ticketCode)*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
+	public double calcTax(Double quantity, Double distance) {
+		return calcSub(quantity, distance)*.075+quantity*(4+5.6+this.getArrivalCity().getPassengerFacilityFee());
 	}
 
 	@Override
-	public double calcSub(int quantity, String ticketCode) {
+	public double calcSub(Double quantity, Double distance) {
 		return (20+quantity*(1-this.getRebate())*this.distance()*this.getCostPerMile());
 		}
 
 	@Override
-	public double calcTotal(int quantity, String ticketCode) {
-		return this.calcTax(quantity, ticketCode)+this.calcSub(quantity, ticketCode);
+	public double calcTotal(Double quantity, Double distance) {
+		return this.calcTax(quantity, distance)+this.calcSub(quantity, distance);
 	}
 
 }

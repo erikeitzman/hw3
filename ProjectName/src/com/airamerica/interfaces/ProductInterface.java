@@ -2,8 +2,8 @@ package com.airamerica.interfaces;
 
 public interface ProductInterface {
 
-	double calcFee(int quantity, String ticketCode);
-	double calcTax(int quantity, String ticketCode);
-	double calcSub(int quantity, String ticketCode);
-	double calcTotal(int quantity, String ticketCode);
+	double calcFee(Double quantity, Double distance);
+	double calcTax(Double quantity, Double distance);
+	double calcSub(Double quantity, Double distance);
+	double calcTotal(Double quantity, Double distance);
 }
