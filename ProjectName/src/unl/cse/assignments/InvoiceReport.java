@@ -32,7 +32,7 @@ public class InvoiceReport {
 			String line = s.nextLine();
 			String array[] = line.split(";");
 			String array2[] = array[4].split(",");
-			Customer b = DataConverter.findCustomer(customerArr, array[2]);
+			Customer b = DataConverter.findCustomer(customerArr, array[1]);
 			Person c = DataConverter.findPerson(personArr, array[2]);
 			Invoice a = new Invoice(array[0], b, c, array[3]);
 			for (int j = 0; j<array2.length; j++){
@@ -53,7 +53,56 @@ public class InvoiceReport {
 		}
 	return invoiceArr;
 	}
-//
+	
+	private String getCostSummary() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("FARES AND SERVICES");
+		sb.append("==================================================\n");
+		//TODO: Add code for generating Cost Summary of all 
+		//products and services in an Invoice
+		return sb.toString();
+	}
+
+	public String generateDetailReport() {
+		StringBuilder sb = new StringBuilder();		
+		sb.append("Individual Invoice Detail Reports\n");
+		sb.append("==================================================\n");
+//		this.getTravelSummary();	
+		/* TODO: Loop through all invoices and call the getTravelSummary() and 
+	getCostSummary() for each invoice*/
+		return sb.toString();
+	}
+	
+	public static void main(String args[]) {
+		Invoice[] invoices = importInvoice();
+		printSummaryReport(invoices);
+		for (int i=0; i<invoices.length; i++){
+			invoices[i].printFlightInformation();
+			invoices[i].printFlightInfo();
+			invoices[i].printProductFares();
+		}
+	}
+	public static void printSummaryReport(Invoice[] invoiceArr){
+		Double totalSub=0.0;
+		Double totalTax=0.0;
+		Double totalFee=0.0;
+		Double totalDiscount=0.0;
+		System.out.println("Executive Summary Report");
+		System.out.println("=========================");
+		System.out.printf("%-10s %-45s %-25s %12s %12s %12s %12s %12s\n","Invoice", "Customer", "Salesperson", "Subtotal", "Fees", "Taxes", "Discount", "Total");
+		for(int i=0; i<invoiceArr.length; i++){
+			invoiceArr[i].printSummary();
+			totalSub += invoiceArr[i].FinalSub();
+			totalTax += invoiceArr[i].FinalTax();
+			totalFee += invoiceArr[i].Fee();
+			totalDiscount += invoiceArr[i].Discount();
+		}
+		System.out.println("===================================================================================================================================================");
+		System.out.printf("%-82s $%11.2f $%11.2f $%11.2f $%11.2f $%11.2f\n\n\n\n", "TOTALS", totalSub, totalFee, totalTax, totalDiscount, totalSub+totalFee+totalTax+totalDiscount);
+	}
+}
+
+
 //	private String generateSummaryReport() {
 //		String q;
 //		StringBuilder sb = new StringBuilder();
@@ -226,46 +275,10 @@ public class InvoiceReport {
 //	}
 
 
-	private String getCostSummary() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("FARES AND SERVICES");
-		sb.append("==================================================\n");
 
-
-
-		//TODO: Add code for generating Cost Summary of all 
-		//products and services in an Invoice
-
-		return sb.toString();
-
-	}
-
-	public String generateDetailReport() {
-		StringBuilder sb = new StringBuilder();		
-		sb.append("Individual Invoice Detail Reports\n");
-		sb.append("==================================================\n");
-		;
-//		this.getTravelSummary();
-		
-		
-		/* TODO: Loop through all invoices and call the getTravelSummary() and 
-	getCostSummary() for each invoice*/
-
-
-		return sb.toString();
-	}
-
-	public static void main(String args[]) {
-		Invoice[] invoices = importInvoice();
-		for (int i=0; i<invoices.length; i++){
-			invoices[i].printFlightInfo();
-			invoices[i].printProductFares();
-		}
 //		InvoiceReport ir = new InvoiceReport();
 //		String summary = ir.generateSummaryReport();
 //		String detail = ir.generateDetailReport();
 //		System.out.println(summary);
 //		System.out.println(detail);
-	}
-	
-}
+

@@ -4,6 +4,8 @@ package com.airamerica;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.airamerica.utils.StandardUtils;
+
 import unl.cse.assignments.DataConverter;
 
 public class Invoice  {
@@ -96,6 +98,84 @@ public class Invoice  {
 			}
 	}
 	
+	public void printProductFares(){
+		for (int i = 0; i < this.getProductList().size(); i++){
+			Double quantity = this.getProductList().get(i).getQuantity();
+			Double misc = this.getProductList().get(i).getMisc();
+			this.getProductList().get(i).getProduct().printFare(quantity, misc);
+		}
+	}
+	
+	public void printSummary(){
+		String name = this.person.getLastName() +", " + this.person.getFirstName();
+		String customerName = this.getCustomer().getName()+"["+this.getCustomer().getType()+"]";
+		System.out.printf("%-10s %-45s %-25s $%11.2f $%11.2f $%11.2f $%11.2f $%11.2f\n",this.getInvoiceCode(), customerName, name, this.FinalSub(), this.Fee(), this.FinalTax(), this.Discount(), this.FinalSub()+this.Discount()+this.Fee()+this.FinalTax());
+	}
+	
+	public Double FinalSub(){
+		Double sub = 0.0;
+		for (int i=0; i<this.getProductList().size(); i++){
+			Double quantity = this.getProductList().get(i).getQuantity();
+			Double misc = this.getProductList().get(i).getMisc();
+			sub = sub + this.getProductList().get(i).getProduct().calcSub(quantity, misc);
+		}
+		return sub;
+	}
+	
+	public Double FinalTax(){
+		Double tax = 0.0;
+		for (int i=0; i<this.getProductList().size(); i++){
+			Double quantity = this.getProductList().get(i).getQuantity();
+			Double misc = this.getProductList().get(i).getMisc();
+			tax = tax + this.getProductList().get(i).getProduct().calcTax(quantity, misc);
+		}
+		return tax;
+	}
+	
+	public Double Discount(){
+		Double discount = 0.0;
+		if(this.getCustomer().getType().equals("Corporate")){
+			discount = (this.FinalSub()) * .12*(-1);
+		}else if(this.getCustomer().getType().equals("Government")){
+			discount = this.FinalTax()*(-1);
+		}
+		return discount;
+	}
+	
+	public Double Fee(){
+		Double fee = 0.0;
+		if(this.getCustomer().getType().equals("Corporate")){
+			fee = 40.0;
+		}
+		return fee;
+	}
+	
+	public void printFlightInformation(){
+		System.out.println("Individual Invoice Detail Reports");
+		System.out.println("==================================================");
+		System.out.println("Invoice "+this.getInvoiceCode());
+		System.out.println("--------------------------------------------------------------------------------------------------------");
+		System.out.println("AIR-AMERICA                                                          PNR");
+		System.out.printf("%s: %3s %49s\n","ISSUE DATE", this.getInvoiceDate(), StandardUtils.generatePNR());
+		System.out.println("--------------------------------------------------------------------------------------------------------");
+		System.out.println("FLIGHT INFORMATION");
+		System.out.println("Day, Date       Flight     Class   DepartureCity and Time        ArrivalCity and Time      Aircraft");
+		for (int i = 0; i < this.getProductList().size(); i++){
+			if(flightBool(i)){
+				Standard tempTicket = (Standard) this.getProductList().get(i).getProduct();
+				System.out.printf("%-15s %-10s %-6s %-30s %-25s %-10s\n", "Fri,08Jan16", tempTicket.getFlightNo(), tempTicket.getFlightClass(), tempTicket.getDepartureCity().getAddress().cityState(), tempTicket.getArrivalCity().getAddress().cityState(), tempTicket.getAircraftType());
+				System.out.printf("%-33s %-30s %-35s\n","", "ord ayy", "phx ayylma");
+				System.out.printf("%15s %-20s %-8s %-6s\n", "", "Traveller", "Age", "SeatNo");
+				for(int j = 0; j<this.getPassengerList().size(); j++){
+					if(this.getPassengerList().get(j).getFlight().equals(this.getProductList().get(i).getProduct().getProductCode())){
+						System.out.printf("%15s %-20s %-8s %-6s\n", "",this.getPassengerList().get(j).getPerson().getLastName()+", "+this.getPassengerList().get(j).getPerson().getFirstName(), this.getPassengerList().get(j).getAge(), this.getPassengerList().get(j).getSeatNumber());
+//						System.out.println(this.getPassengerList().get(j).getPerson().getLastName()+", "+this.getPassengerList().get(j).getPerson().getFirstName()+", "+this.getPassengerList().get(j).getAge()+", "+this.getPassengerList().get(j).getSeatNumber());
+					}
+				}
+			}
+		}
+	}
+	
 	public void printFlightInfo(){
 		for (int i = 0; i < this.getProductList().size(); i++){
 			if(flightBool(i)){
@@ -108,13 +188,20 @@ public class Invoice  {
 		}
 	}
 	
-	public void printProductFares(){
-		for (int i = 0; i < this.getProductList().size(); i++){
-			Double quantity = this.getProductList().get(i).getQuantity();
-			Double misc = this.getProductList().get(i).getMisc();
-			this.getProductList().get(i).getProduct().printFare(quantity, misc);
-		}
-	}
+//	if (b.getType().equals("Corporate")){
+//	discount = (finalsub) * .12*(-1);
+//	fee = 40.0;
+//}else if (b.getType().equals("Government")){
+//	discount = finaltax*(-1);
+//}
+//	public void FinalTotal(){
+//		Double total = 0.0;
+//		for (int i=0; i<this.getProductList().size(); i++){
+//			Double quantity = this.getProductList().get(i).getQuantity();
+//			Double misc = this.getProductList().get(i).getMisc();
+//			total = total + this.getProductList().get(i).getProduct().calcTotal(quantity, misc);
+//		}
+//	}
 //	public void addSoldProduct(Product productArr[], String productString){
 //		String array3[] = productString.split(":");
 //		Double quantity = 1.0;
@@ -169,6 +256,7 @@ public class Invoice  {
 //		//System.out.println("               Traveller               Age     Seat NO.");
 //		
 //	}
+
 
 
 //public void printSummary(int i){

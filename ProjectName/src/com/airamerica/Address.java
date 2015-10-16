@@ -61,9 +61,9 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	/* Getters and Setters - Generated using Eclipse 
-
 	
-	/* Additional methods as required */
+	public String cityState(){
+		return this.getCity().trim()+", "+this.getState().trim();
+	}
+
 }

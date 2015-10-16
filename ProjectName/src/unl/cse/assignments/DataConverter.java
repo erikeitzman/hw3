@@ -199,7 +199,10 @@ public class DataConverter {
 				return personArr[k];
 			}
 		}
-		return personArr[0];
+		Person p = personArr[0];
+		p.setLastName("ONLINE");
+		p.setFirstName("Null");
+		return p;
 	}
 	
 	public static Customer findCustomer(Customer customerArr[], String customerCode){
