@@ -6,4 +6,5 @@ public interface ProductInterface {
 	double calcTax(Double quantity, Double distance);
 	double calcSub(Double quantity, Double distance);
 	double calcTotal(Double quantity, Double distance);
+	void printFare(Double quantity, Double distance);
 }

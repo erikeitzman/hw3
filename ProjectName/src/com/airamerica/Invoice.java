@@ -108,6 +108,13 @@ public class Invoice  {
 		}
 	}
 	
+	public void printProductFares(){
+		for (int i = 0; i < this.getProductList().size(); i++){
+			Double quantity = this.getProductList().get(i).getQuantity();
+			Double misc = this.getProductList().get(i).getMisc();
+			this.getProductList().get(i).getProduct().printFare(quantity, misc);
+		}
+	}
 //	public void addSoldProduct(Product productArr[], String productString){
 //		String array3[] = productString.split(":");
 //		Double quantity = 1.0;

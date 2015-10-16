@@ -259,6 +259,7 @@ public class InvoiceReport {
 		Invoice[] invoices = importInvoice();
 		for (int i=0; i<invoices.length; i++){
 			invoices[i].printFlightInfo();
+			invoices[i].printProductFares();
 		}
 //		InvoiceReport ir = new InvoiceReport();
 //		String summary = ir.generateSummaryReport();

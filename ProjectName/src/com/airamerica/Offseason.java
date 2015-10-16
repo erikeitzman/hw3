@@ -59,5 +59,12 @@ public class Offseason extends Standard{
 	public double calcTotal(Double quantity, Double distance) {
 		return this.calcTax(quantity, distance)+this.calcSub(quantity, distance);
 	}
+	@Override
+	public void printFare(Double quantity, Double distance){
+		double subtotal = this.calcSub(quantity, distance);
+		double tax = this.calcTax(quantity, distance);
+		double total = this.calcTotal(quantity, distance);
+		System.out.println("OffseasonTicket"+"("+this.getFlightClass()+")"+" "+subtotal);
+	}
 
 }

@@ -36,4 +36,9 @@ public abstract class Product implements ProductInterface{
 	public double distance(){
 		return 0;
 	}
+	public void printFare(Double quantity, Double distance){
+		System.out.println();
+	}
+	public void printInfo(){
+	}
 }
